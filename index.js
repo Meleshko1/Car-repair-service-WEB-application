@@ -228,7 +228,5 @@ window.main =  function main() {
     renderLoginPage();
   }
 };
-
-
 main();
 }}
