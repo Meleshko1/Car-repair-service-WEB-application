@@ -1,0 +1,66 @@
+﻿CREATE TABLE `cars` (
+  `idcar` int(11) NOT NULL AUTO_INCREMENT,
+  `idclient` int(11) NOT NULL,
+  `carname` varchar(80) NOT NULL,
+  PRIMARY KEY (`idcar`),
+  foreign key (`idclient`) references `сlients`(`idсlient`) on delete cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `сlients` (
+  `idсlient` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `idcar` int(11) NOT NULL,
+  `fio` varchar(45) NOT NULL,
+  `phone_number` varchar(45) NOT NULL,
+  `address` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  PRIMARY KEY (`idсlient`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `types_of_work` (
+  `idtypes_of_work` int(11) NOT NULL AUTO_INCREMENT,
+  `jobtitle` varchar(45) NOT NULL,
+  `descriptionofwork` varchar(45) NOT NULL,
+  PRIMARY KEY (`idtypes_of_work`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `requests` (
+  `idrequests` int(11) NOT NULL AUTO_INCREMENT,
+  `idauto` int(11) NOT NULL,
+  `idwork` int(11) NOT NULL,
+  `description_of_work` varchar(100) NOT NULL,
+  `urgency` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idrequests`),
+foreign key (`idwork`) references `types_of_work`(`idtypes_of_work`) on delete cascade,
+foreign key (`idauto`) references `cars`(`idcar`) on delete cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `accepted_requests` (
+  `idrequests` int(11) NOT NULL,
+  `price` double NOT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `idservice` int(11) NOT NULL,
+  `status` varchar(45) NOT NULL,
+  PRIMARY KEY (`idrequests`,`idservice`),
+  foreign key (`idrequests`) references `requests`(`idrequests`) on delete cascade,
+  foreign key (`idservice`) references `services`(`idservice`) on delete cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+CREATE TABLE `services` (
+  `idservice` int(11) NOT NULL AUTO_INCREMENT,
+  `fio` varchar(45) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  `phone_number` varchar(45) NOT NULL,
+  `address` varchar(45) NOT NULL,
+  `login` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  PRIMARY KEY (`idservice`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
