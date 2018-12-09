@@ -1,3 +1,4 @@
+
 var path = require('path'); //Для доступа к файловой системе (установка статик роута)
 var bodyParser = require('body-parser'); //Для парсинга тела запросов на API
 var express = require('express'); //сервер
@@ -5,24 +6,33 @@ var app = express(); //Сервер obj
 var mysql = require('mysql'); //MySQL либа для связи с БД
 //Настраиваем соединение (нужно вынести в отдельный файл) Amazon
 //var connection = mysql.createConnection({
-//    host: *****,
-//    user: '****',
-//    password: '*****',
-//    database: ****
+//    host: 'servicesearch.cosaesnybqqy.eu-central-1.rds.amazonaws.com',
+//    user: 'lorem',
+//    password: '102938abc',
+//    database: 'serviceSearch'
 //});
 //Настраиваем соединение (нужно вынести в отдельный файл) Local
 var connection = mysql.createConnection({
-    host: '*****',
-    user: '****',
-    password: '**',
-    database: '*'
+    host: 'localhost',
+    user: 'root',
+    password: '102938',
+    database: 'serviceSearch'
 });
+
+
 connection.connect(); //Подключение к БД MySQL
 var port = 80; //Порт на котором будет работать сервер (стандартный для http - 80)
 //Body Parser настройки
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('dist'));//Статика на директорию с файлами
+
+
+
+////////////////////////////////////////////////
+///////////        A P I         //////////////
+/////////////////////////////////////////////
+
 //Проводим авторизацию пользователя в ответ на логин и пароль отдаём id пользователя и тип аккаунта
 app.post('/autorithation', function (req, res) {
     var accountinfo = {
@@ -55,6 +65,7 @@ app.post('/autorithation', function (req, res) {
        
     });
 });
+
 //Получаем данные о регистрации клиента (и машине) и заносим в бд
 app.post('/registationclient', function (req, res) {
     var userinfo = {
@@ -69,7 +80,7 @@ app.post('/registationclient', function (req, res) {
    var idRecord ; 
    //Добавим клиента в БД
    var rezult = connection.query("INSERT INTO сlients (login,password,fio,phone_number,address,email) VALUES ('"+userinfo.login+"','"
-+userinfo.password+"','"+userinfo.fio+"','"+userinfo.phone_number+"','"+userinfo.address+"','"+userinfo.email+"')"
+    +userinfo.password+"','"+userinfo.fio+"','"+userinfo.phone_number+"','"+userinfo.address+"','"+userinfo.email+"')"
     , function (error, results, fields) {
         if (error) throw error;
         console.log("User Reg "+userinfo.login);
@@ -84,6 +95,7 @@ app.post('/registationclient', function (req, res) {
     });
     });   
 });
+
 //Получаем данные о регистрации сервиса и заносим в бд
 app.post('/registationservice', function (req, res) {
     var serviceinfo = {
@@ -97,13 +109,14 @@ app.post('/registationservice', function (req, res) {
         email: req.body.email
     };
     var rezult = connection.query("INSERT INTO services (login,password,fio,phone_number,address,email,description,servicename) VALUES ('"+serviceinfo.login+"','"
-+serviceinfo.password+"','"+serviceinfo.fio+"','"+serviceinfo.phone_number+"','"+serviceinfo.address+"','"+serviceinfo.email+"','"+serviceinfo.description+"','"+serviceinfo.servicename+"')"
+    +serviceinfo.password+"','"+serviceinfo.fio+"','"+serviceinfo.phone_number+"','"+serviceinfo.address+"','"+serviceinfo.email+"','"+serviceinfo.description+"','"+serviceinfo.servicename+"')"
     , function (error, results, fields) {
         if (error) throw error;
         console.log("Service reg "+serviceinfo.login);
         res.send("OK");
     });  
 });
+
 //Получаем данные о заявке и заносим в БД
 app.post('/addrequest', function (req, res) {
     var requestinfo = {
@@ -118,7 +131,9 @@ app.post('/addrequest', function (req, res) {
         res.send("OK");
         console.log("Request ADD "+requestinfo.idwork);
     });
+   
 });
+
 //Отдаём все заявки с данным ID пользователя
 app.get('/getrequests', function (req, res) {
     var requestinfo = {
@@ -130,7 +145,9 @@ app.get('/getrequests', function (req, res) {
         res.send(results);
         console.log(results);
     });
+   
 });
+
 //Отдаём все предложения выполнения для заявки с заданы ID
 app.get('/getresponseforrequest', function (req, res) {
     var requestinfo = {
@@ -142,7 +159,9 @@ app.get('/getresponseforrequest', function (req, res) {
         res.send(results);
         console.log(results);
     });
-})
+   
+});
+
 //Отдаём инфу о сервисе с заданными ID
 app.get('/getinfoaboutservice', function (req, res) {
     var idserviceinfo = {
@@ -155,6 +174,7 @@ app.get('/getinfoaboutservice', function (req, res) {
         console.log(results);
     });
 });
+
 //Отдаём все запросы на ремонт
 app.get('/getallrequests', function (req, res) {
    var rezult = connection.query("SELECT requests.idrequests, types_of_work.jobtitle,cars.carname,requests.description_of_work,requests.urgency  FROM requests JOIN cars ON requests.idauto = cars.idcar JOIN types_of_work ON requests.idwork = types_of_work.idtypes_of_work "
@@ -164,6 +184,7 @@ app.get('/getallrequests', function (req, res) {
         console.log(results);
     });
 });
+
 //Ставим значение предложенной улуги на заявку в true
 app.post('/acceptservice', function (req, res) {
     var requestinfo = {
@@ -180,6 +201,7 @@ app.post('/acceptservice', function (req, res) {
         }
     });
 });
+
 //Отменяем (удаляем) заявку автовладельца с заданным ID
 app.post('/cancelrequest', function (req, res) {
     var requestinfo = {
@@ -195,6 +217,8 @@ app.post('/cancelrequest', function (req, res) {
         }
     });
 });
+
+
 //Добавляем предложение сервиса для заявки с указанным ID
 app.post('/offeraservice', function (req, res) {
     var offerinfo = {
@@ -213,6 +237,7 @@ app.post('/offeraservice', function (req, res) {
         }
     });
 });
+
 //Отдаём всё что нужно клиенту для заполнения формы подачи заявки
 app.get('/getallinfo', function (req, res) {
     var sendInfo = {
@@ -233,10 +258,19 @@ app.get('/getallinfo', function (req, res) {
          res.send(sendInfo);
          console.log(results);
      });
+
  });
+
+
+
+/////////////////////////////////////////////////
+///////////       END   API     ///////////////
+/////////////////////////////////////////////
+
 app.use(function(req, res, next) {
     res.status(404).send('Такой страницы не существует...');
   });
+
 //Запускаем сервер
 app.listen(port, function () {
     console.log('Server worked on port: ' + port);

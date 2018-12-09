@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from 'axios';
 import {
     Tab,
     Row,
@@ -14,8 +13,10 @@ import {
     Button,
     For
 } from "react-bootstrap";
-import DropDownList from "../DropDownList.jsx";
+import DropDownList from "./DropDownList.jsx";
+
 class AddRequestForUserTab extends Component {
+
   render() {
    var addRequest =  function () {
       //Функция для вызова с регистрации которая отправляет данные на Back-end о сервисе
@@ -25,7 +26,8 @@ class AddRequestForUserTab extends Component {
       params.append("idwork", document.getElementById("idwork").value );
       params.append("description_of_work", document.getElementById("description_of_work").value  );
       params.append("urgency", document.getElementById("urgency").value  );
-      axios.post("/addrequest", params)
+      axios
+        .post("/addrequest", params)
         .then(function(response) {
           if (response.data == "OK") {
             console.log("Успешно добавили запрос от пользователя!");
@@ -35,9 +37,12 @@ class AddRequestForUserTab extends Component {
           console.log(error);
         });
     }
+
     return (
         <Form horizontal>
+
      <DropDownList />
+
     <FormGroup controlId="formHorizontalDescription">
       <Col componentClass={ControlLabel} sm={2}>
         Подробности работы котрую необходимо выполнить
@@ -46,6 +51,7 @@ class AddRequestForUserTab extends Component {
         <FormControl id="description_of_work" type="text" placeholder="Подробности" />
       </Col>
     </FormGroup>
+
     <FormGroup controlId="formHorizontalPassword">
       <Col componentClass={ControlLabel} sm={2}>
         Срочность выполнения работы
@@ -54,6 +60,8 @@ class AddRequestForUserTab extends Component {
         <FormControl id="urgency" type="text" placeholder="Срочность" />
       </Col>
     </FormGroup>
+
+
     <FormGroup>
       <Col smOffset={2} sm={10}>
         <Button onClick={addRequest} >
@@ -65,4 +73,5 @@ class AddRequestForUserTab extends Component {
     )
     }
 }
+
 export default AddRequestForUserTab;

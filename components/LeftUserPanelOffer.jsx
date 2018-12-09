@@ -3,6 +3,7 @@ import { Tab, Row, Col, Nav, NavItem } from "react-bootstrap";
 import ShowAllRequestUser from "./ShowAllRequestUser.jsx";
 import AddRequestForUserTab from "./AddRequestForUserTab.jsx";
 import axios from "axios";
+
 class LeftUserPanelOffer extends Component {
   render() {
     return (
@@ -33,5 +34,5 @@ class LeftUserPanelOffer extends Component {
     );
   }
 }
-export default LeftUserPanelOffer;
 
+export default LeftUserPanelOffer;

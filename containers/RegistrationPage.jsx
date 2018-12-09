@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import {
   Modal,
   Button,
@@ -11,7 +12,12 @@ import {
   Tab,
   Tabs
 } from "react-bootstrap";
+
+
+
+
 class LoginPage extends Component {
+  
   render() {
     return (
       <div className="static-modal">
@@ -19,10 +25,13 @@ class LoginPage extends Component {
           <Modal.Header>
             <Modal.Title >Регистрация</Modal.Title>
           </Modal.Header>
+
           <Modal.Body>
+
           <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
           <Tab eventKey={1} title="Автовладелец">
           <Form horizontal >
+
               <FormGroup controlId="formHorizontal" >
                 <Col componentClass={ControlLabel} sm={2}>
                   Логин
@@ -31,6 +40,7 @@ class LoginPage extends Component {
                   <FormControl id="login" type="login" placeholder="Логин" />
                 </Col>
               </FormGroup>
+
               <FormGroup controlId="formHorizontalPassword">
                 <Col componentClass={ControlLabel} sm={2}>
                   Пароль
@@ -39,6 +49,7 @@ class LoginPage extends Component {
                   <FormControl id="password" type="password" placeholder="Пароль" />
                 </Col>
               </FormGroup>
+
               <FormGroup controlId="formHorizontalPassword">
                 <Col componentClass={ControlLabel} sm={2}>
                   Автомобиль
@@ -56,6 +67,7 @@ class LoginPage extends Component {
                   <FormControl id="fio" placeholder="ФИО" />
                 </Col>
               </FormGroup>
+
               <FormGroup controlId="formHorizontalPassword">
                 <Col componentClass={ControlLabel} sm={2}>
                   Номер телефона
@@ -64,6 +76,7 @@ class LoginPage extends Component {
                   <FormControl id="phone_number" placeholder="Номер телефона" />
                 </Col>
               </FormGroup>
+
               <FormGroup controlId="formHorizontalPassword">
                 <Col componentClass={ControlLabel} sm={2}>
                   Адрес
@@ -72,6 +85,7 @@ class LoginPage extends Component {
                   <FormControl id="address" placeholder="Адрес" />
                 </Col>
               </FormGroup>
+
               <FormGroup controlId="formHorizontalPassword">
                 <Col componentClass={ControlLabel} sm={2}>
                   Email
@@ -80,6 +94,7 @@ class LoginPage extends Component {
                   <FormControl id="email" placeholder="Email" />
                 </Col>
               </FormGroup>
+
               <FormGroup>
                 <Col smOffset={2} sm={10}>
                   <Button id="regclientBtn" onClick={this.props.sendRegClient} >Зарегестрироваться</Button>
@@ -98,6 +113,7 @@ class LoginPage extends Component {
                   <FormControl id="login2" type="login" placeholder="Логин" />
                 </Col>
               </FormGroup>
+
               <FormGroup controlId="formHorizontalPassword">
                 <Col componentClass={ControlLabel} sm={2}>
                   Пароль
@@ -106,6 +122,9 @@ class LoginPage extends Component {
                   <FormControl id="password2" type="password" placeholder="Пароль" />
                 </Col>
               </FormGroup>
+
+           
+
               <FormGroup controlId="formHorizontalPassword">
                 <Col componentClass={ControlLabel} sm={2}>
                   ФИО
@@ -114,6 +133,7 @@ class LoginPage extends Component {
                   <FormControl id="fio2" placeholder="ФИО" />
                 </Col>
               </FormGroup>
+
               <FormGroup controlId="formHorizontalPassword">
                 <Col componentClass={ControlLabel} sm={2}>
                   Номер телефона
@@ -122,6 +142,7 @@ class LoginPage extends Component {
                   <FormControl id="phone_number2" placeholder="Номер телефона" />
                 </Col>
               </FormGroup>
+
               <FormGroup controlId="formHorizontalPassword">
                 <Col componentClass={ControlLabel} sm={2}>
                   Адрес
@@ -130,6 +151,7 @@ class LoginPage extends Component {
                   <FormControl id="address2" placeholder="Адрес" />
                 </Col>
               </FormGroup>
+
               <FormGroup controlId="formHorizontalPassword">
                 <Col componentClass={ControlLabel} sm={2}>
                   Email
@@ -138,6 +160,7 @@ class LoginPage extends Component {
                   <FormControl id="email2" placeholder="Email" />
                 </Col>
               </FormGroup>
+
               <FormGroup controlId="formHorizontalPassword">
                 <Col componentClass={ControlLabel} sm={2}>
                   Название сервиса
@@ -146,6 +169,7 @@ class LoginPage extends Component {
                   <FormControl id="servicename2" placeholder="Название" />
                 </Col>
               </FormGroup>
+
               <FormGroup controlId="formHorizontalPassword">
                 <Col componentClass={ControlLabel} sm={2}>
                   Описание сервиса
@@ -154,6 +178,7 @@ class LoginPage extends Component {
                   <FormControl id="description2" placeholder="Описание" />
                 </Col>
               </FormGroup>
+
               <FormGroup>
                 <Col smOffset={2} sm={10}>
                   <Button id="regserviceBtn" onClick={this.props.sendRegService} >Зарегестрироваться</Button>
@@ -162,7 +187,10 @@ class LoginPage extends Component {
             </Form>
           </Tab>
           </Tabs>
+
+           
           </Modal.Body>
+
           <Modal.Footer>
             <Button onClick={this.props.renderLoginPage}>Уже есть аккаунт??</Button>
           </Modal.Footer>
@@ -171,4 +199,5 @@ class LoginPage extends Component {
     );
   }
 }
+
 export default LoginPage;

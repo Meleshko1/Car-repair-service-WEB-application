@@ -33,4 +33,5 @@ class Mainpageforclient extends Component {
     );
   }
 }
+
 export default Mainpageforclient;

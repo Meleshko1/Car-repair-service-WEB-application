@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import axios from 'axios';
-import {Tab, Row, Col, Nav, Table, Button } from "react-bootstrap";
+import { Tab, Row, Col, Nav, Table, Button } from "react-bootstrap";
+
 class ShowAllRequestUser extends Component {
   render() {
     function deleteRequest(e) {//Функция для удаления заявки клиента
       console.log("Пытаемся удалить заявку номер ="+e.currentTarget.id);
+
       var params = new URLSearchParams();
       params.append("idrequest", e.currentTarget.id);
-      axios.post("/cancelrequest", params)
+      axios
+        .post("/cancelrequest", params)
         .then(function(response) {
           if (response.data == "OK") {
             console.log("Успешно удалили!");
@@ -17,6 +19,11 @@ class ShowAllRequestUser extends Component {
         .catch(function(error) {
           console.log(error);
         });
+    }
+
+    function openModal(e)
+    {
+      
     }
     return (
       <Table responsive>
@@ -30,6 +37,7 @@ class ShowAllRequestUser extends Component {
           </tr>
         </thead>
         <tbody>
+
           {window.requests.map(item => (
             <tr id={item}>
             <td>{item.jobtitle}</td>
@@ -51,4 +59,5 @@ class ShowAllRequestUser extends Component {
     );
   }
 }
+
 export default ShowAllRequestUser;

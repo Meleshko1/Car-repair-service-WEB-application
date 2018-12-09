@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import { Tab, Row, Col, Nav, Table, Button } from "react-bootstrap";
 
 class ShowAllRequestService extends Component {
+  
   render() {
     function addOffer(e) {//Функция для удаления заявки клиента
       window.idrequest = e.currentTarget.id;
       window.goadd();
     }
+
     return (
       <Table responsive>
         <thead>
@@ -20,6 +22,7 @@ class ShowAllRequestService extends Component {
           </tr>
         </thead>
         <tbody>
+
           {window.requests2.map(item => (
             <tr id={item}>
             <td>{item.idrequests}</td>
@@ -28,6 +31,7 @@ class ShowAllRequestService extends Component {
             <td>{item.carname}</td>
             <td>{item.urgency}</td>
             <td> <Col smOffset={2} sm={10}>
+            
         <Button id={item.idrequests} onClick={addOffer}>
           Предложить свои услуги
         </Button>
@@ -39,4 +43,5 @@ class ShowAllRequestService extends Component {
     );
   }
 }
+
 export default ShowAllRequestService;

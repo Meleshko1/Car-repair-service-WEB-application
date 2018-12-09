@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from 'axios';
 import {
     Tab,
     Row,
@@ -15,7 +14,9 @@ import {
     For
 } from "react-bootstrap";
 import { win32 } from "path";
+
 class AddRequestForService extends Component {
+
   render() {
    var addRequest =  function () {
       //Функция для вызова с регистрации которая отправляет данные на Back-end о сервисе
@@ -24,8 +25,9 @@ class AddRequestForService extends Component {
       params.append("idrequests", window.idrequest);
       params.append("idservice", window.idclient );
       params.append("price", document.getElementById("price").value  );
-      params.append("description", document.getElementById("description").value);
-      axios.post("/offeraservice", params)
+      params.append("description", document.getElementById("description").value  );
+      axios
+        .post("/offeraservice", params)
         .then(function(response) {
           if (response.data == "OK") {
             console.log("Успешно добавили предложение от сервиса!");
@@ -36,8 +38,12 @@ class AddRequestForService extends Component {
           console.log(error);
         });
     }
+
     return (
         <Form horizontal>
+
+   
+
     <FormGroup controlId="formHorizontalDescription">
       <Col componentClass={ControlLabel} sm={2}>
         Описание
@@ -46,6 +52,7 @@ class AddRequestForService extends Component {
         <FormControl id="description" type="text" placeholder="Описание" />
       </Col>
     </FormGroup>
+
     <FormGroup controlId="formHorizontalPassword">
       <Col componentClass={ControlLabel} sm={2}>
         Цена
@@ -54,6 +61,8 @@ class AddRequestForService extends Component {
         <FormControl id="price" type="text" placeholder="Цена" />
       </Col>
     </FormGroup>
+
+
     <FormGroup>
       <Col smOffset={2} sm={10}>
         <Button onClick={addRequest} >
@@ -65,4 +74,5 @@ class AddRequestForService extends Component {
     )
     }
 }
+
 export default AddRequestForService;

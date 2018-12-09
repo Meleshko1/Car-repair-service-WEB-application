@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap";
 
 class LoginPage extends Component {
+
   render() {
     return (
       <div className="static-modal">
@@ -37,11 +38,13 @@ class LoginPage extends Component {
                   <FormControl id="password" type="password" placeholder="Пароль" />
                 </Col>
               </FormGroup>
+
               <FormGroup>
                 <Col smOffset={2} sm={10}>
                   <Checkbox>Запомнить меня</Checkbox>
                 </Col>
               </FormGroup>
+
               <FormGroup>
                 <Col smOffset={2} sm={10}>
                   <Button onClick={this.props.autorithation} >Войти</Button>
@@ -49,6 +52,7 @@ class LoginPage extends Component {
               </FormGroup>
             </Form>
           </Modal.Body>
+
           <Modal.Footer>
             <Button onClick={this.props.renderRegistration} >Нет аккаунта?</Button>
           </Modal.Footer>
@@ -57,4 +61,5 @@ class LoginPage extends Component {
     );
   }
 }
+
 export default LoginPage;

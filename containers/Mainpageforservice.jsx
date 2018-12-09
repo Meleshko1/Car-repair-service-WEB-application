@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import LeftUserPanel from "../components/LeftUserPanel.jsx";
 import HeaderComponent from "../components/HeaderComponent.jsx";
@@ -15,8 +16,10 @@ import {
   Tab,
   Tabs
 } from "react-bootstrap";
+
 class Mainpageforservice extends Component {
   render() {
+    
     if(this.props.params)
     return(
       <div>
@@ -33,4 +36,5 @@ class Mainpageforservice extends Component {
     )
   }
 }
+
 export default Mainpageforservice;

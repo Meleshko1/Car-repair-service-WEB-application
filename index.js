@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"; 
 import LoginPage from "./containers/LoginPage.jsx";
 import Mainpageforclient from "./containers/Mainpageforclient.jsx";
 import Mainpageforservice from "./containers/Mainpageforservice.jsx";
@@ -13,7 +13,9 @@ function getCookie(cookie_name) {
     "(^|;) ?" + cookie_name + "=([^;]*)(;|$)"
   );
   if (results) return unescape(results[2]);
-  else return null;}
+  else return null;
+}
+
 function setCookie(name, value, options) {
   options = options || {};
   var expires = options.expires;
@@ -36,6 +38,7 @@ function setCookie(name, value, options) {
   }
   document.cookie = updatedCookie;
 }
+
 function sendRegClient() {
   //Функция для вызова с регистрации которая отправляет данные на Back-end о клиенте
   console.log("Пытаемся зарегать клиента!");
@@ -83,6 +86,7 @@ function sendRegService() {
       console.log(error);
     });
 }
+
 function autorithation() {
   //Функция для вызова с авторизации которая отправляет логин и пасс на Back-end
   console.log("Пытаемся авторизировать!");
@@ -102,14 +106,14 @@ function autorithation() {
           );
           setCookie("accountype", "client", "13/06/3000 00:00:00");
           setCookie("userid", response.data.idclient, "13/06/3000 00:00:00");
-          //main();
+          main();
         } else {
           console.log(
             "Это аккаунт автомастерской его ID " + response.data.idclient
           );
           setCookie("accountype", "service", "13/06/3000 00:00:00");
           setCookie("userid", response.data.idclient, "13/06/3000 00:00:00");
-          //main();
+          main();
         }
       }
     })
@@ -117,6 +121,7 @@ function autorithation() {
       console.log(error);
     });
 }
+
 function renderRegistration() {
   console.log("Рендерим страницу Регистрации!");
   render(
@@ -126,7 +131,9 @@ function renderRegistration() {
       sendRegService={sendRegService}
     />,
     document.getElementById("container")
-  );}
+  );
+}
+
 function renderLoginPage() {
   console.log("Рендерим страницу Логина!");
   render(
@@ -137,6 +144,7 @@ function renderLoginPage() {
     document.getElementById("container")
   );
 }
+
 function getAllInfoForAdd() { //Функция для получения информации необходимой для подачи заявки
   console.log("Пытаемся получить данные для заполнения заявки");
   axios
@@ -147,12 +155,14 @@ function getAllInfoForAdd() { //Функция для получения инф�
       console.log("Получили ответ от сервера со списком инфы!");
       console.log(response.data);
       window.inform = response.data;
+   
       getAllRequests();
     })
     .catch(function(error) {
       console.log(error);
     });
 }
+
 function getAllRequests (){ //Функция для получения всех заявок клиента
   console.log("Пытаемся получить заявки клиента с ID = "+window.idclient);
   axios.get('/getrequests', {
@@ -167,10 +177,13 @@ function getAllRequests (){ //Функция для получения всех 
     console.log(error);
   });
   }
+
 function rendermainpageForClient(showoffer) {
   console.log("Рендерим страницу клиента!");
+
   if(showoffer)
   render(
+    
      <Mainpageforclient showoffer={true} />,
      document.getElementById("container")
    );
@@ -180,6 +193,7 @@ function rendermainpageForClient(showoffer) {
     document.getElementById("container")
   );
 }
+
 function rendermainpageForService(params) {
   console.log("Рендерим страницу сервиса!");
   render(
@@ -187,6 +201,7 @@ function rendermainpageForService(params) {
     document.getElementById("container")
   );
 }
+
 window.gomain = function getAllRequestsService(){
   console.log("Пытаемся получить все заявки от пользователей");
   axios.get('/getallrequests', {
@@ -201,6 +216,7 @@ window.gomain = function getAllRequestsService(){
     console.log(error);
   });
 }
+
 window.goadd = function RendeAddOffer(){
   console.log("Рендерим страницу добавления предложения для сервиса!");
   var add = true;
@@ -209,6 +225,8 @@ window.goadd = function RendeAddOffer(){
     document.getElementById("container")
   );
 }
+
+
 window.main =  function main() {
 
   console.log("UserID = " + getCookie("userid"));
@@ -221,10 +239,12 @@ window.main =  function main() {
     } else {
       //Если тип аккаунта автовладелец
       getAllInfoForAdd()
+    
     }
   } else {
     //Если не авторизован
     renderLoginPage();
   }
 };
-//main();
+
+main();
