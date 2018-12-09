@@ -13,7 +13,7 @@ function getCookie(cookie_name) {
     "(^|;) ?" + cookie_name + "=([^;]*)(;|$)"
   );
   if (results) return unescape(results[2]);
-  else return null;
+  else return null;}
 function setCookie(name, value, options) {
   options = options || {};
   var expires = options.expires;
@@ -83,7 +83,6 @@ function sendRegService() {
       console.log(error);
     });
 }
-
 function autorithation() {
   //Функция для вызова с авторизации которая отправляет логин и пасс на Back-end
   console.log("Пытаемся авторизировать!");
@@ -103,14 +102,14 @@ function autorithation() {
           );
           setCookie("accountype", "client", "13/06/3000 00:00:00");
           setCookie("userid", response.data.idclient, "13/06/3000 00:00:00");
-          main();
+          //main();
         } else {
           console.log(
             "Это аккаунт автомастерской его ID " + response.data.idclient
           );
           setCookie("accountype", "service", "13/06/3000 00:00:00");
           setCookie("userid", response.data.idclient, "13/06/3000 00:00:00");
-          main();
+          //main();
         }
       }
     })
@@ -127,7 +126,7 @@ function renderRegistration() {
       sendRegService={sendRegService}
     />,
     document.getElementById("container")
-  );
+  );}
 function renderLoginPage() {
   console.log("Рендерим страницу Логина!");
   render(
@@ -228,5 +227,4 @@ window.main =  function main() {
     renderLoginPage();
   }
 };
-main();
-}}
+//main();
